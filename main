@@ -1,0 +1,54 @@
+import time
+import random
+def get_expirence():
+    while True:
+        try:
+
+            gh = int(input("какие отжиманья вы хотите сделать 1-Отжимания с эксцентрическим сопротивлением и неравномерным распределением массы, "
+            "2-Отжимания с удержанием равновесия на неустойчивой поверхности, 3-Отжимания с имитацией работы в скафандре:"))
+            if 1 <= gh <=3:
+                break
+            else:
+                print("неверный номер")
+        except ValueError:
+            print("Неверный ввод")
+    while True:
+        try:
+            count = int(input("Введите количество повторений: "))
+            if count > 0:
+                break
+            else:
+                print("Количество повторений не может быть меньше 0")
+        except ValueError:
+            print("Неверный ввод")
+    return gh,count
+
+def countdown(seconds):
+    for i in range(seconds, 0, -1):
+        print(i)
+        time.sleep(1)
+    print("Старт!")
+
+def exercise_break(seconds):
+    print(f"Отдых {seconds} секунд...")
+    time.sleep(seconds)
+
+def main():
+    gh, count = get_expirence()
+    print(f"Вы выбрали упражнение номер{gh} и количество повторений {count}")
+
+    sets = int(input("Введите количество подходов: "))
+    rest_between_sets = int(input("Введите время отдыха между подходами: "))
+
+    for i in range(sets):
+        print(f"\nПодход {i+1} из {sets}")
+        countdown(3)
+        for j in range(count):
+            try:
+                input(f"Повторение {j+1} из {count} (нажмите Enter для завершения): ")
+            except KeyboardInterrupt:
+                print("\n Тренировка прервана")
+                return
+            exercise_break(rest_between_sets)
+if name == "main":
+    main()
